@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './SearchForm.module.css';
 
-const SearchForm = () => {
+
+const SearchForm = (props) => {
+  const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    if (props.keywords) {
+      setInputValue(props.keywords);
+    }
+  }, [props.keywords]);
+
+  const inputChangeHandler = (event) => {
+    setInputValue(event.target.value);
+  }
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const url = `https://api.themoviedb.org/3/search/multi?api_key=69a59336843cba77936e73fc3e3e5a69&language=fr-FR&query=${inputValue}&page=1&include_adult=false`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(response => props.onResults(response.results, inputValue));
+  };
+
   return (
     <section>
-      <form className={classes["search_form"]} method="GET" action="details.html">
-        <input className={classes["search_input"]} type="search" name="search_input" id="search_input" />
-        <button className={classes["search_btn"]} type="submit" id="search_btn">Rechercher</button>
+      <form className={classes.form} onSubmit={submitHandler}>
+        <input className={classes.input} type="search" value={inputValue} onChange={inputChangeHandler} />
+        <button className={classes.btn} type="submit">Rechercher</button>
       </form>
     </section>
   )
