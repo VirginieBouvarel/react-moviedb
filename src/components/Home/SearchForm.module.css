@@ -1,0 +1,21 @@
+.search_form {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.search_input {
+  border: none;
+  border: 1px solid silver;
+  border-radius: 3px;
+  padding: 0.5rem;
+  width: 75%;
+}
+.search_btn {
+  border: none;
+  background-color: hsl(260, 71%, 62%);
+  color: hsl(0, 0%, 100%);
+  padding: 1rem;
+  border-radius: 3px;
+  margin-top: 1rem;
+}
