@@ -4,10 +4,10 @@ import logo from '../assets/logo.svg'
 
 const Header = () => {
   return (
-    <div className={classes.header}>
-      <a href="index.html" class={classes.logo}><img src={logo} alt="Lien vers la page d'accueil" /></a>
+    <header className={classes.header}>
+      <a href="index.html" className={classes.logo}><img src={logo} alt="Lien vers la page d'accueil" /></a>
       <h1>Mes films</h1>
-    </div>
+    </header>
   )
 }
 
