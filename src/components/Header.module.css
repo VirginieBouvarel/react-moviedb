@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: hsl(260, 71%, 62%);
+}
+.logo {
+  width: 5rem;
+  margin: 1rem;
+}
+h1 {
+  font-family: "Raleway", sans-serif;
+  font-size: 2rem;
+  color: #fff;
+}
