@@ -1,13 +1,64 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import-normalize;
+
+/* RESET */
+html {
+  font-size: 62.5%; /*1rem = 10px*/
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+/*
+Classe de masquage d'accessibilité 
+Cette classe est ajoutée sur un élément nécessaire en termes d'accessibilité/SEO ou recommandé par le W3C mais non souhaité sur le design final. L'élément concerné ne sera pas visible par l'utilisateur mais sera pris en compte par les liseuses et les robots de référencement.
+*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* added line */
+  border: 0;
+}
+
+/* GLOBALS */
+:root {
+  --font-body: "Commissioner", sans-serif;
+  --color-black: hsl(0, 0%, 0%);
+  --color-white: hsl(100, 100%, 100%);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  color: var(--color-black);
 }
