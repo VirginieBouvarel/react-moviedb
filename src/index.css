@@ -1,6 +1,15 @@
 @import-normalize;
 
-/* RESET */
+/* GLOBALS */
+:root {
+  --font-body: "Commissioner", sans-serif;
+  --color-black: hsl(0, 0%, 0%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-grey: hsl(260, 10%, 29%);
+  --color-light-grey: hsl(0, 0%, 48%);
+  --bg-violet: hsl(260, 71%, 62%);
+}
+
 html {
   font-size: 62.5%; /*1rem = 10px*/
   box-sizing: border-box;
@@ -14,9 +23,10 @@ html {
   padding: 0;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+body {
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  color: var(--color-black);
 }
 
 h1,
@@ -26,12 +36,23 @@ p {
   margin: 0;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 a {
   text-decoration: none;
 }
 
 ul li {
   list-style-type: none;
+}
+
+section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 /*
@@ -48,17 +69,4 @@ Cette classe est ajoutée sur un élément nécessaire en termes d'accessibilit�
   clip: rect(0, 0, 0, 0);
   white-space: nowrap; /* added line */
   border: 0;
-}
-
-/* GLOBALS */
-:root {
-  --font-body: "Commissioner", sans-serif;
-  --color-black: hsl(0, 0%, 0%);
-  --color-white: hsl(100, 100%, 100%);
-}
-
-body {
-  font-family: var(--font-body);
-  font-size: 1.6rem;
-  color: var(--color-black);
 }

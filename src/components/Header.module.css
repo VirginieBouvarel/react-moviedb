@@ -1,7 +1,7 @@
 .header {
   display: flex;
   align-items: center;
-  background-color: hsl(260, 71%, 62%);
+  background-color: var(--bg-violet);
 }
 .logo {
   width: 5rem;
@@ -10,5 +10,5 @@
 h1 {
   font-family: "Raleway", sans-serif;
   font-size: 2rem;
-  color: #fff;
+  color: var(--color-white);
 }

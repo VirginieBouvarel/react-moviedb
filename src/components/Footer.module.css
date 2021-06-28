@@ -1,18 +1,13 @@
 .footer {
-  background-color: hsl(260, 71%, 62%);
+  background-color: var(--bg-violet);
   position: fixed;
   bottom: 0;
   width: 100%;
   min-height: 10rem;
-  color: hsl(0, 0%, 100%);
+  color: var(--color-white);
   text-align: center;
 }
 .copyright {
   margin: 3rem;
   font-size: 1.1rem;
 }
-/* @media screen and (max-width: 375px) {
-  .card {
-    width: 155px;
-  }
-} */

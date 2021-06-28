@@ -12,17 +12,23 @@
 }
 .card h3 {
   font-size: 1.2rem;
-  color: var(--c-grey);
+  color: var(--color-grey);
   word-wrap: break-word;
   padding-left: 0.5rem;
   margin-bottom: 0.5rem;
 }
 .card p {
   font-size: 1rem;
-  color: var(--c-light-grey);
+  color: var(--color-light-grey);
   padding-left: 0.5rem;
 }
 .card img {
   width: 172.5px;
   height: 268.75px;
+}
+
+@media screen and (max-width: 375px) {
+  .card {
+    width: 155px;
+  }
 }

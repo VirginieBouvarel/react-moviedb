@@ -13,8 +13,8 @@
 }
 .btn {
   border: none;
-  background-color: hsl(260, 71%, 62%);
-  color: hsl(0, 0%, 100%);
+  background-color: var(--bg-violet);
+  color: var(--color-white);
   padding: 1rem;
   border-radius: 3px;
   margin-top: 1rem;
