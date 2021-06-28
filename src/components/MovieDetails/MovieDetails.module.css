@@ -1,0 +1,43 @@
+.back {
+  padding: 1rem 0 0;
+}
+.back_btn {
+  background-color: var(--bg-violet);
+  border-radius: 3px;
+  padding: 1rem;
+  margin: 0 1rem;
+  color: var(--c-white);
+  border: none;
+  cursor: pointer;
+  display: block;
+  width: 85px;
+}
+.movie {
+  color: var(--c-light-grey);
+}
+.infos {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+.infos p {
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
+  color: var(--c-light-grey);
+}
+.movie img,
+.movie h2,
+.movie p {
+  margin-bottom: 1rem;
+}
+.movie h2 {
+  font-size: 1.6rem;
+  color: var(--c-grey);
+  word-wrap: break-word;
+  padding-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.summary {
+  padding: 0 0.5rem;
+  font-size: 1.4rem;
+}

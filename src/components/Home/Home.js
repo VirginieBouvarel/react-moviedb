@@ -1,19 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SearchForm from './SearchForm';
 import Results from './Results';
 
-const Home = ({ onSelect }) => {
-  const [movies, setMovies] = useState();
-  const [keywords, setKeywords] = useState('');
+const Home = ({ movies, keywords, onResults, onSelect }) => {
 
-  const resultsHandler = (results, keywords) => {
-    setMovies(results);
-    setKeywords(keywords);
-  }
 
   return (
     <div>
-      <SearchForm onResults={resultsHandler} keywords={keywords} />
+      <SearchForm onResults={onResults} keywords={keywords} />
       {movies && <Results movies={movies} keywords={keywords} onSelect={onSelect} />}
     </div>
   )

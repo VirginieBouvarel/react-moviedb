@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Movie';
+import classes from './Movie.module.css';
 import placeHolderTMDB from '../../assets/poster-tmdb.png';
 
 const Movie = ({ keywords, id, posterPath, name, releaseDate, onSelect }) => {
