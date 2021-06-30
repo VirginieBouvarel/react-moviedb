@@ -1,13 +1,27 @@
 .back {
-  padding: 1rem 0 0;
+  padding: 1rem 0 1rem;
+  display: flex;
+  justify-content: space-between;
 }
-.back-btn {
+.btn {
   background-color: var(--bg-violet);
   border-radius: 3px;
   padding: 1rem;
   margin: 0 1rem;
   color: var(--color-white);
   border: none;
+  cursor: pointer;
+  display: block;
+  width: 85px;
+}
+
+.btn-outline {
+  background-color: var(--color-white);
+  border-radius: 3px;
+  padding: 1rem;
+  margin: 0 1rem;
+  color: var(--bg-violet);
+  border: 1px solid var(--bg-violet);
   cursor: pointer;
   display: block;
   width: 85px;
