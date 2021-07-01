@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from './utils/firebase-config';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faStar } from '@fortawesome/free-solid-svg-icons';
@@ -16,10 +16,30 @@ function App() {
   const [keywords, setKeywords] = useState('');
   const [selection, setSelection] = useState(false);
   const [idSelected, setIdSelected] = useState();
+  const [bookmarks, setBookmarks] = useState([]);
 
+  // Affichage des favoris
+  useEffect(() => {
+    const bookmarksDb = firebase.database().ref('bookmarks');
 
+    bookmarksDb.on('value', snapshot => {
+      let previousBookmarks = snapshot.val();
+
+      let formatedBookmarks = [];
+      for (let key in previousBookmarks) {
+        formatedBookmarks.push({ key, ...previousBookmarks[key] });
+      }
+      setBookmarks(formatedBookmarks);
+    })
+  }, []);
+
+  // Création d'un favoris
   const createBookmarkHandler = (movie) => {
     const bookmarksDB = firebase.database().ref('bookmarks');
+
+    for (let item of bookmarks) {
+      if (item.id === movie.id) return;
+    }
 
     const bookmark = {
       average: movie.average,
@@ -27,14 +47,16 @@ function App() {
       release: movie.release,
       summary: movie.summary,
       title: movie.title,
+      id: movie.id
     }
+
     bookmarksDB.push(bookmark);
+
   }
 
   const removeBookmarkHandler = (id) => {
-    console.log(`Movie to delete = ${id}`);
-    // const bookmarkToDelete = firebase.database().ref('bookmarks').child(id);
-    // bookmarkToDelete.remove();
+    const bookmarkToDelete = bookmarks.filter(bookmark => bookmark.id === id);
+    firebase.database().ref('bookmarks').child(bookmarkToDelete[0].key).remove();
   }
 
   const resultsHandler = (results, keywords) => {
@@ -54,7 +76,7 @@ function App() {
   return (
     <>
       <Header />
-      <BookmarksList />
+      <BookmarksList bookmarks={bookmarks} />
 
       <main>
         {!selection && (
@@ -67,6 +89,7 @@ function App() {
         )}
         {selection && (
           <MovieDetails
+            bookmarks={bookmarks}
             onAddBookmark={createBookmarkHandler}
             onDeleteBookmark={removeBookmarkHandler}
             id={idSelected}

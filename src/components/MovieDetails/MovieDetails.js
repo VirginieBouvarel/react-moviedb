@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import placeHolderTMDB from '../../assets/poster-tmdb.png';
 
 
-const MovieDetails = ({ id, onAddBookmark, onDeleteBookmark, onBack }) => {
+const MovieDetails = ({ id, bookmarks, onAddBookmark, onDeleteBookmark, onBack }) => {
   const [movieToDisplay, setMovieToDisplay] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
+
+
 
 
   useEffect(() => {
@@ -20,12 +22,24 @@ const MovieDetails = ({ id, onAddBookmark, onDeleteBookmark, onBack }) => {
         release: data.release_date,
         average: data.vote_average,
         summary: data.overview,
+        id: data.id
       };
+
+
       setMovieToDisplay(movie);
+
+      for (let item of bookmarks) {
+        if (item.id === movie.id) {
+          setIsFavorite(true);
+        }
+      }
 
     };
     fetchMovie();
-  }, [id]);
+  }, [id, bookmarks]);
+
+
+
 
   const bookmarkToggleHandler = () => {
     if (!isFavorite) {
