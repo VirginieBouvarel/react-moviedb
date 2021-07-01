@@ -35,23 +35,10 @@ function App() {
 
   // Création d'un favoris
   const createBookmarkHandler = (movie) => {
-    const bookmarksDB = firebase.database().ref('bookmarks');
-
     for (let item of bookmarks) {
       if (item.id === movie.id) return;
     }
-
-    const bookmark = {
-      average: movie.average,
-      posterUrl: movie.posterUrl,
-      release: movie.release,
-      summary: movie.summary,
-      title: movie.title,
-      id: movie.id
-    }
-
-    bookmarksDB.push(bookmark);
-
+    firebase.database().ref('bookmarks').push(movie);
   }
 
   const removeBookmarkHandler = (id) => {
@@ -79,15 +66,7 @@ function App() {
       <BookmarksList bookmarks={bookmarks} />
 
       <main>
-        {!selection && (
-          <Home
-            movies={movies}
-            keywords={keywords}
-            onResults={resultsHandler}
-            onSelect={selectHandler}
-          />
-        )}
-        {selection && (
+        {selection ? (
           <MovieDetails
             bookmarks={bookmarks}
             onAddBookmark={createBookmarkHandler}
@@ -95,7 +74,15 @@ function App() {
             id={idSelected}
             onBack={backHandler}
           />
+        ) : (
+          <Home
+            movies={movies}
+            keywords={keywords}
+            onResults={resultsHandler}
+            onSelect={selectHandler}
+          />
         )}
+
       </main>
 
       <Footer />
