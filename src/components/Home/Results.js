@@ -13,7 +13,6 @@ const Results = ({ movies, keywords, onSelect }) => {
           <Movie
             key={movie.id}
             id={movie.id}
-            keywords={keywords}
             posterPath={movie.poster_path}
             name={movie.original_title || movie.original_name || movie.name || movie.title}
             releaseDate={movie.release_date}

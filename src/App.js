@@ -12,13 +12,12 @@ library.add(faArrowLeft, faStar);
 
 
 function App() {
-  const [movies, setMovies] = useState();
-  const [keywords, setKeywords] = useState('');
+  const [bookmarks, setBookmarks] = useState([]);
   const [selection, setSelection] = useState(false);
   const [idSelected, setIdSelected] = useState();
-  const [bookmarks, setBookmarks] = useState([]);
 
-  // Affichage des favoris
+
+
   useEffect(() => {
     const bookmarksDb = firebase.database().ref('bookmarks');
 
@@ -33,7 +32,6 @@ function App() {
     })
   }, []);
 
-  // Création d'un favoris
   const createBookmarkHandler = (movie) => {
     for (let item of bookmarks) {
       if (item.id === movie.id) return;
@@ -46,11 +44,13 @@ function App() {
     firebase.database().ref('bookmarks').child(bookmarkToDelete[0].key).remove();
   }
 
-  const resultsHandler = (results, keywords) => {
-    setMovies(results);
-    setKeywords(keywords);
-  }
+  const [searchKeywords, setSearchKeywords] = useState('');
+  const [searchResults, setSearchResults] = useState();
 
+  const resultsHandler = (results, keywords) => {
+    setSearchResults(results);
+    setSearchKeywords(keywords);
+  }
   const selectHandler = (id) => {
     setSelection(true);
     setIdSelected(id);
@@ -68,16 +68,16 @@ function App() {
       <main>
         {selection ? (
           <MovieDetails
+            id={idSelected}
             bookmarks={bookmarks}
             onAddBookmark={createBookmarkHandler}
             onDeleteBookmark={removeBookmarkHandler}
-            id={idSelected}
             onBack={backHandler}
           />
         ) : (
           <Home
-            movies={movies}
-            keywords={keywords}
+            searchKeywords={searchKeywords}
+            searchResults={searchResults}
             onResults={resultsHandler}
             onSelect={selectHandler}
           />

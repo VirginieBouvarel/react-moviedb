@@ -2,13 +2,12 @@ import React from 'react'
 import SearchForm from './SearchForm';
 import Results from './Results';
 
-const Home = ({ movies, keywords, onResults, onSelect }) => {
-
+const Home = ({ searchKeywords, searchResults, onResults, onSelect }) => {
 
   return (
     <div>
-      <SearchForm onResults={onResults} keywords={keywords} />
-      {movies && <Results movies={movies} keywords={keywords} onSelect={onSelect} />}
+      <SearchForm previousSearch={searchKeywords} onResults={onResults} />
+      {searchResults && <Results movies={searchResults} keywords={searchKeywords} onSelect={onSelect} />}
     </div>
   )
 }

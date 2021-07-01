@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import classes from './SearchForm.module.css';
 
 
-const SearchForm = (props) => {
+const SearchForm = ({ previousSearch, onResults }) => {
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
-    if (props.keywords) {
-      setInputValue(props.keywords);
+    if (previousSearch) {
+      setInputValue(previousSearch);
     }
-  }, [props.keywords]);
+  }, [previousSearch]);
 
   const inputChangeHandler = (event) => {
     setInputValue(event.target.value);
@@ -20,7 +20,7 @@ const SearchForm = (props) => {
 
     fetch(url)
       .then(response => response.json())
-      .then(response => props.onResults(response.results, inputValue));
+      .then(response => onResults(response.results, inputValue));
   };
 
   return (

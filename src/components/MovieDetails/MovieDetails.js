@@ -8,9 +8,6 @@ const MovieDetails = ({ id, bookmarks, onAddBookmark, onDeleteBookmark, onBack }
   const [movieToDisplay, setMovieToDisplay] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
 
-
-
-
   useEffect(() => {
     const fetchMovie = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=69a59336843cba77936e73fc3e3e5a69&language=fr-FR`);
@@ -25,7 +22,6 @@ const MovieDetails = ({ id, bookmarks, onAddBookmark, onDeleteBookmark, onBack }
         id: data.id
       };
 
-
       setMovieToDisplay(movie);
 
       for (let item of bookmarks) {
@@ -37,8 +33,6 @@ const MovieDetails = ({ id, bookmarks, onAddBookmark, onDeleteBookmark, onBack }
     };
     fetchMovie();
   }, [id, bookmarks]);
-
-
 
 
   const bookmarkToggleHandler = () => {
