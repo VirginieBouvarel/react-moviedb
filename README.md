@@ -18,5 +18,5 @@ Avec ce projet j'ai appris...
 
 Ce que je pourrais améliorer...
 
-- Améiorer l'interface de la fonctionnalité favoris
+- Améliorer l'interface de la fonctionnalité favoris
 - Ajouter des routes
