@@ -15,6 +15,8 @@ function App() {
   const [bookmarks, setBookmarks] = useState([]);
   const [selection, setSelection] = useState(false);
   const [idSelected, setIdSelected] = useState();
+  const [searchKeywords, setSearchKeywords] = useState('');
+  const [searchResults, setSearchResults] = useState();
 
 
 
@@ -43,9 +45,6 @@ function App() {
     const bookmarkToDelete = bookmarks.filter(bookmark => bookmark.id === id);
     firebase.database().ref('bookmarks').child(bookmarkToDelete[0].key).remove();
   }
-
-  const [searchKeywords, setSearchKeywords] = useState('');
-  const [searchResults, setSearchResults] = useState();
 
   const resultsHandler = (results, keywords) => {
     setSearchResults(results);
