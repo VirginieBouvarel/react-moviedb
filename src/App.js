@@ -1,58 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import firebase from './utils/firebase-config';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { moviesActions } from './store/movies-slice';
+import { fetchBookmarks } from './store/movies-actions'
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home/Home';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import BookmarksList from './components/Bookmark/BookmarksList';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faArrowLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+
+
 library.add(faArrowLeft, faStar);
 
 
 function App() {
-  const [bookmarks, setBookmarks] = useState([]);
   const [selection, setSelection] = useState(false);
-  const [idSelected, setIdSelected] = useState();
-  const [searchKeywords, setSearchKeywords] = useState('');
-  const [searchResults, setSearchResults] = useState();
 
+  const dispatch = useDispatch();
+  const keywords = useSelector(state => state.searchKeywords);
+  const results = useSelector(state => state.searchResults);
+  const movieSelectedId = useSelector(state => state.idSelected);
+  const bookmarks = useSelector(state => state.bookmarks);
 
 
   useEffect(() => {
-    const bookmarksDb = firebase.database().ref('bookmarks');
-
-    bookmarksDb.on('value', snapshot => {
-      let previousBookmarks = snapshot.val();
-
-      let formatedBookmarks = [];
-      for (let key in previousBookmarks) {
-        formatedBookmarks.push({ key, ...previousBookmarks[key] });
-      }
-      setBookmarks(formatedBookmarks);
-    })
-  }, []);
+    dispatch(fetchBookmarks())
+  }, [dispatch]);
 
   const createBookmarkHandler = (movie) => {
-    for (let item of bookmarks) {
-      if (item.id === movie.id) return;
-    }
-    firebase.database().ref('bookmarks').push(movie);
+    dispatch(moviesActions.createBookmark(movie));
   }
 
   const removeBookmarkHandler = (id) => {
-    const bookmarkToDelete = bookmarks.filter(bookmark => bookmark.id === id);
-    firebase.database().ref('bookmarks').child(bookmarkToDelete[0].key).remove();
+    dispatch(moviesActions.removeBookmark(id));
   }
 
   const resultsHandler = (results, keywords) => {
-    setSearchResults(results);
-    setSearchKeywords(keywords);
+    dispatch(moviesActions.displayMoviesResults({
+      keywords,
+      results
+    }));
   }
   const selectHandler = (id) => {
     setSelection(true);
-    setIdSelected(id);
+    dispatch(moviesActions.selectMovie(id));
   };
 
   const backHandler = () => {
@@ -67,7 +61,7 @@ function App() {
       <main>
         {selection ? (
           <MovieDetails
-            id={idSelected}
+            id={movieSelectedId}
             bookmarks={bookmarks}
             onAddBookmark={createBookmarkHandler}
             onDeleteBookmark={removeBookmarkHandler}
@@ -75,8 +69,8 @@ function App() {
           />
         ) : (
           <Home
-            searchKeywords={searchKeywords}
-            searchResults={searchResults}
+            searchKeywords={keywords}
+            searchResults={results}
             onResults={resultsHandler}
             onSelect={selectHandler}
           />

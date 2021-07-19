@@ -3,7 +3,7 @@ import classes from './Results.module.css';
 import Movie from './Movie.js';
 
 
-const Results = ({ movies, keywords, onSelect }) => {
+const Results = ({ movies, onSelect }) => {
 
   return (
     <section className={classes.results}>
@@ -24,4 +24,4 @@ const Results = ({ movies, keywords, onSelect }) => {
   )
 }
 
-export default Results
+export default Results;
