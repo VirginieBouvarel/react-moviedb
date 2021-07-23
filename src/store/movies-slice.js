@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const moviesSlice = createSlice({
+const bookmarksSlice = createSlice({
   name: 'search',
   initialState: {
     searchKeywords: '',
     searchResults: null,
-    ideSelected: null,
+    idSelected: null,
     bookmarks: []
   },
   reducers: {
@@ -17,6 +17,9 @@ const moviesSlice = createSlice({
       state.searchResults = action.payload.results;
     },
     createBookmark(state, action) {
+      for (let item of state.bookmarks) {
+        if (item.id === action.payload.id) return;
+      }
       state.bookmarks = [...state.bookmarks, action.payload];
     },
     removeBookmark(state, action) {
@@ -28,5 +31,5 @@ const moviesSlice = createSlice({
   }
 });
 
-export const moviesActions = moviesSlice.actions;
-export default moviesSlice;
+export const bookmarksActions = bookmarksSlice.actions;
+export default bookmarksSlice;

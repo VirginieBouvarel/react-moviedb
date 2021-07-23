@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { moviesActions } from './store/movies-slice';
+import { bookmarksActions } from './store/movies-slice';
 import { addBookmark, deleteBookmark, fetchBookmarks } from './store/movies-actions'
 
 import Header from './components/Header';
@@ -35,18 +35,19 @@ function App() {
   }
 
   const removeBookmarkHandler = (id) => {
-    dispatch(deleteBookmark(id))
+    dispatch(deleteBookmark(id));
+    dispatch(fetchBookmarks());
   }
 
   const resultsHandler = (results, keywords) => {
-    dispatch(moviesActions.displayMoviesResults({
+    dispatch(bookmarksActions.displayMoviesResults({
       keywords,
       results
     }));
   }
   const selectHandler = (id) => {
     setSelection(true);
-    dispatch(moviesActions.selectMovie(id));
+    dispatch(bookmarksActions.selectMovie(id));
   };
 
   const backHandler = () => {

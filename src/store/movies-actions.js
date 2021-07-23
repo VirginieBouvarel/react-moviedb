@@ -1,4 +1,4 @@
-import { moviesActions } from './movies-slice';
+import { bookmarksActions } from './movies-slice';
 import firebase from '../utils/firebase-config';
 
 
@@ -13,7 +13,7 @@ export const fetchBookmarks = () => {
       for (let key in previousBookmarks) {
         formatedBookmarks.push({ key, ...previousBookmarks[key] });
       }
-      dispatch(moviesActions.replaceBookmarks(formatedBookmarks));
+      dispatch(bookmarksActions.replaceBookmarks(formatedBookmarks));
     })
   }
 }
@@ -38,7 +38,7 @@ export const addBookmark = (movie) => {
       title: movie.title
     }
     bookmarksDb.push(bookmark);
-    dispatch(moviesActions.createBookmark(bookmark));
+    dispatch(bookmarksActions.createBookmark(bookmark));
   }
 }
 
@@ -51,7 +51,7 @@ export const deleteBookmark = (id) => {
       for (let key in previousBookmarks) {
         if (previousBookmarks[key].id === id) {
           bookmarksDb.child(key).remove();
-          dispatch(moviesActions.removeBookmark(id));
+          dispatch(bookmarksActions.removeBookmark(id));
         }
       }
     })
