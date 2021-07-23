@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { moviesActions } from './store/movies-slice';
-import { fetchBookmarks } from './store/movies-actions'
+import { addBookmark, deleteBookmark, fetchBookmarks } from './store/movies-actions'
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -31,11 +31,11 @@ function App() {
   }, [dispatch]);
 
   const createBookmarkHandler = (movie) => {
-    dispatch(moviesActions.createBookmark(movie));
+    dispatch(addBookmark(movie));
   }
 
   const removeBookmarkHandler = (id) => {
-    dispatch(moviesActions.removeBookmark(id));
+    dispatch(deleteBookmark(id))
   }
 
   const resultsHandler = (results, keywords) => {

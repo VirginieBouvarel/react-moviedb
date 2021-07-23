@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import firebase from '../utils/firebase-config';
 
 const moviesSlice = createSlice({
   name: 'search',
@@ -18,14 +17,10 @@ const moviesSlice = createSlice({
       state.searchResults = action.payload.results;
     },
     createBookmark(state, action) {
-      for (let item of state.bookmarks) {
-        if (item.id === action.payload.id) return;
-      }
-      firebase.database().ref('bookmarks').push(action.payload);
+      state.bookmarks = [...state.bookmarks, action.payload];
     },
     removeBookmark(state, action) {
-      const bookmarkToDelete = state.bookmarks.filter(bookmark => bookmark.id === action.payload);
-      firebase.database().ref('bookmarks').child(bookmarkToDelete[0].key).remove();
+      state.bookmarks = state.bookmarks.filter(bookmark => bookmark.id !== action.payload);
     },
     replaceBookmarks(state, action) {
       state.bookmarks = action.payload;
