@@ -17,9 +17,9 @@ const bookmarksSlice = createSlice({
       state.searchResults = action.payload.results;
     },
     createBookmark(state, action) {
-      for (let item of state.bookmarks) {
-        if (item.id === action.payload.id) return;
-      }
+      // for (let item of state.bookmarks) {
+      //   if (item.id === action.payload.id) return;
+      // }
       state.bookmarks = [...state.bookmarks, action.payload];
     },
     removeBookmark(state, action) {

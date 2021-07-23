@@ -1,4 +1,4 @@
-import { bookmarksActions } from './movies-slice';
+import { bookmarksActions } from './bookmarks-slice';
 import firebase from '../utils/firebase-config';
 
 
@@ -6,7 +6,7 @@ export const fetchBookmarks = () => {
   return async dispatch => {
     const bookmarksDb = firebase.database().ref('bookmarks');
 
-    bookmarksDb.on('value', snapshot => {
+    bookmarksDb.once('value', snapshot => {
       let previousBookmarks = snapshot.val();
 
       let formatedBookmarks = [];
@@ -21,13 +21,13 @@ export const fetchBookmarks = () => {
 export const addBookmark = (movie) => {
   return async dispatch => {
     const bookmarksDb = firebase.database().ref('bookmarks');
-    bookmarksDb.on('value', snapshot => {
-      let previousBookmarks = snapshot.val();
+    // bookmarksDb.on('value', snapshot => {
+    //   let previousBookmarks = snapshot.val();
 
-      for (let key in previousBookmarks) {
-        if (key.id === movie.id) return;
-      }
-    })
+    //   for (let key in previousBookmarks) {
+    //     if (key.id === movie.id) return;
+    //   }
+    // })
 
     const bookmark = {
       average: movie.average,

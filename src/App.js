@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { bookmarksActions } from './store/movies-slice';
-import { addBookmark, deleteBookmark, fetchBookmarks } from './store/movies-actions'
+import { bookmarksActions } from './store/bookmarks-slice';
+import { addBookmark, deleteBookmark, fetchBookmarks } from './store/bookmarks-actions'
 
 import Header from './components/Header';
 import Footer from './components/Footer';
