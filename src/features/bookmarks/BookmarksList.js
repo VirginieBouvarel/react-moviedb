@@ -1,7 +1,7 @@
 import classes from './BookmarksList.module.css';
 
 const BookmarksList = ({ bookmarks }) => {
-
+  console.log(bookmarks);
   return (
     <div className={classes.bookmarks}>
       <h3>Mes films favoris</h3>
@@ -12,4 +12,4 @@ const BookmarksList = ({ bookmarks }) => {
   )
 }
 
-export default BookmarksList
+export default BookmarksList;
