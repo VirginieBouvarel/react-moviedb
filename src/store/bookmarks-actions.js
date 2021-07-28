@@ -2,6 +2,7 @@ import { bookmarksActions } from './bookmarks-slice';
 import firebase from '../utils/firebase-config';
 
 
+
 export const fetchBookmarks = () => {
   return async dispatch => {
     const bookmarksDb = firebase.database().ref('bookmarks');
