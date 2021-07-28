@@ -6,7 +6,7 @@ const bookmarksSlice = createSlice({
     searchKeywords: '',
     searchResults: null,
     idSelected: null,
-    bookmarksArray: []
+    bookmarks: []
   },
   reducers: {
     selectMovie(state, action) {
@@ -17,17 +17,19 @@ const bookmarksSlice = createSlice({
       state.searchResults = action.payload.results;
     },
     createBookmark(state, action) {
-      state.bookmarksArray = [...state.bookmarksArray, action.payload];
+      // for (let item of state.bookmarks) {
+      //   if (item.id === action.payload.id) return;
+      // }
+      state.bookmarks = [...state.bookmarks, action.payload];
     },
     removeBookmark(state, action) {
-      state.bookmarksArray = state.bookmarksArray.filter(bookmark => bookmark.id !== action.payload);
+      state.bookmarks = state.bookmarks.filter(bookmark => bookmark.id !== action.payload);
     },
     replaceBookmarks(state, action) {
-      state.bookmarksArray = action.payload;
+      state.bookmarks = action.payload;
     }
   }
 });
 
-export const { selectMovie, displayMoviesResults, createBookmark, removeBookmark, replaceBookmarks } = bookmarksSlice.actions;
-
-export default bookmarksSlice.reducer;
+export const bookmarksActions = bookmarksSlice.actions;
+export default bookmarksSlice;

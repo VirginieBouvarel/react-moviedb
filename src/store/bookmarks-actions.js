@@ -1,5 +1,5 @@
-import { replaceBookmarks, createBookmark, removeBookmark } from './bookmarks-slice';
-import firebase from '../../utils/firebase-config';
+import { bookmarksActions } from './bookmarks-slice';
+import firebase from '../utils/firebase-config';
 
 
 export const fetchBookmarks = () => {
@@ -13,7 +13,7 @@ export const fetchBookmarks = () => {
       for (let key in previousBookmarks) {
         formatedBookmarks.push({ key, ...previousBookmarks[key] });
       }
-      dispatch(replaceBookmarks(formatedBookmarks));
+      dispatch(bookmarksActions.replaceBookmarks(formatedBookmarks));
     })
   }
 }
@@ -21,6 +21,13 @@ export const fetchBookmarks = () => {
 export const addBookmark = (movie) => {
   return async dispatch => {
     const bookmarksDb = firebase.database().ref('bookmarks');
+    // bookmarksDb.on('value', snapshot => {
+    //   let previousBookmarks = snapshot.val();
+
+    //   for (let key in previousBookmarks) {
+    //     if (key.id === movie.id) return;
+    //   }
+    // })
 
     const bookmark = {
       average: movie.average,
@@ -31,7 +38,7 @@ export const addBookmark = (movie) => {
       title: movie.title
     }
     bookmarksDb.push(bookmark);
-    dispatch(createBookmark(bookmark));
+    dispatch(bookmarksActions.createBookmark(bookmark));
   }
 }
 
@@ -44,7 +51,7 @@ export const deleteBookmark = (id) => {
       for (let key in previousBookmarks) {
         if (previousBookmarks[key].id === id) {
           bookmarksDb.child(key).remove();
-          dispatch(removeBookmark(id));
+          dispatch(bookmarksActions.removeBookmark(id));
         }
       }
     })
