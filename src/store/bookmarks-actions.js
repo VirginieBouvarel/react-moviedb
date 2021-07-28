@@ -22,13 +22,6 @@ export const fetchBookmarks = () => {
 export const addBookmark = (movie) => {
   return async dispatch => {
     const bookmarksDb = firebase.database().ref('bookmarks');
-    // bookmarksDb.on('value', snapshot => {
-    //   let previousBookmarks = snapshot.val();
-
-    //   for (let key in previousBookmarks) {
-    //     if (key.id === movie.id) return;
-    //   }
-    // })
 
     const bookmark = {
       average: movie.average,
